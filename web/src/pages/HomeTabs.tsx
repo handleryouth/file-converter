@@ -18,7 +18,7 @@ export default function HomeTabs() {
         </Tabs.List>
       </Tabs.ListContainer>
 
-      <Tabs.Panel className="pt-4" id="image">
+      <Tabs.Panel className="pt-4 h-full" id="image">
         <ImageScreen />
       </Tabs.Panel>
       <Tabs.Panel className="pt-4" id="video">
