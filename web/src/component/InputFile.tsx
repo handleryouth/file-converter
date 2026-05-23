@@ -1,5 +1,6 @@
 import { Button, Input } from "@heroui/react";
 import { type ComponentProps } from "react";
+import { useTranslation } from "../translations";
 
 type NativeInputType = Exclude<ComponentProps<typeof Input>, "type">;
 
@@ -20,6 +21,7 @@ export default function InputFile({
   input,
   buttonProps,
 }: InputProps) {
+  const { translate } = useTranslation();
   const { children: buttonChildren, ...buttonPropsRest } = buttonProps ?? {};
   return (
     <div className={`flex flex-col gap-2 ${containerClassName ?? ""}`}>
@@ -32,7 +34,9 @@ export default function InputFile({
         placeholder={input.placeholder ?? "Please Input Image"}
         type="file"
       />
-      <Button {...buttonPropsRest}>{buttonChildren ?? "Input File"}</Button>
+      <Button {...buttonPropsRest}>
+        {buttonChildren ?? translate("common.buttons.file")}
+      </Button>
     </div>
   );
 }
