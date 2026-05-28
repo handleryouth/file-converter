@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
-@ComponentScan(basePackages = { "com.example.api" })
+@SpringBootApplication(scanBasePackages = "com.example")
+@ComponentScan(basePackages = { "com.example" })
 @EnableJpaRepositories(basePackages = "com.example.api.repository")
 public class ApiApplication {
 

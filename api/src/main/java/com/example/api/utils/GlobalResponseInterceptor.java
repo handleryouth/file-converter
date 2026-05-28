@@ -11,6 +11,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
@@ -37,6 +38,9 @@ public class GlobalResponseInterceptor implements ResponseBodyAdvice<Object> {
             methodArgumentNotValidException.getBindingResult().getFieldErrors()
                     .forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
             return ResponseEntity.status(400).body(ApiResponse.error("Errors: " + errors.toString()));
+        } else if (ex instanceof MissingServletRequestParameterException missingServletRequestParameterException) {
+            return ResponseEntity.status(400).body(ApiResponse
+                    .error("Missing parameter: " + missingServletRequestParameterException.getParameterName()));
         } else {
             return ResponseEntity.status(500).body(ApiResponse.error("An unexpected error occurred"));
         }
