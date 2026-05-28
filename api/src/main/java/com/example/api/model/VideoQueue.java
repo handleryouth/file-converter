@@ -13,9 +13,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "image-queue", schema = "image-compressor")
-public class ImageQueue {
-
+@Table(name = "video-queue", schema = "video-compressor")
+public class VideoQueue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -33,7 +32,6 @@ public class ImageQueue {
     @Column(name = "status")
     private Integer status;
 
-    @Column(name = "image_format")
-    private String imageFormat;
-
+    @Column(name = "video_format")
+    private String videoFormat;
 }

@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.example.api.dto.ImageDto;
+import com.example.api.dto.response.ImageDto;
 import com.example.api.mapper.ImageQueueMapper;
 import com.example.api.model.ImageQueue;
 import com.example.api.repository.ImageQueueRepository;
@@ -37,7 +37,7 @@ public class ImageQueueService {
 
     public void addToQueue(String fileName, String imageFormat) {
         ImageQueue newQueueItem = new ImageQueue();
-        newQueueItem.setFilename(fileName);
+        newQueueItem.setFileName(fileName);
         newQueueItem.setImageFormat(imageFormat);
         newQueueItem.setStatus(0);
         newQueueItem.setRequestedAt(java.time.LocalDateTime.now());

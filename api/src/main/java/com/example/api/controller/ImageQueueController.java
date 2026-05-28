@@ -2,8 +2,8 @@ package com.example.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.dto.AddToQueueDTO;
-import com.example.api.dto.ImageDto;
+import com.example.api.dto.request.AddToQueueDTO;
+import com.example.api.dto.response.ImageDto;
 import com.example.api.service.ImageQueueService;
 
 import jakarta.validation.Valid;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/api/image")
 public class ImageQueueController {
 
-    @Value("${file.upload-dir}")
+    @Value("${file.upload-dir.image}")
     private String uploadDir;
 
     private final ImageQueueService imageQueueService;
@@ -46,7 +46,7 @@ public class ImageQueueController {
     public ResponseEntity<ImageDto> getDetailQueue(@RequestParam(required = true) UUID id) {
         ImageDto result = imageQueueService.getImageQueueById(id);
         if (result == null) {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
         return ResponseEntity.ok(result);
     }
