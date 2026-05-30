@@ -18,7 +18,7 @@ import jakarta.validation.Payload;
 // This custom annotation is provided with default value, and if we add
 // constraint annotation to the field, we can override the default value. ---
 // IGNORE ---
-public @interface ValidMultipartFile {
+public @interface IValidMultipart {
 
     long maxSize() default 300 * 1024 * 1024;
 

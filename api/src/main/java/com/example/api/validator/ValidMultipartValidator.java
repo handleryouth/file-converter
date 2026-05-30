@@ -5,12 +5,12 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ValidMultipartValidator implements ConstraintValidator<ValidMultipartFile, MultipartFile> {
+public class ValidMultipartValidator implements ConstraintValidator<IValidMultipart, MultipartFile> {
 
     private long maxSize;
 
     @Override
-    public void initialize(ValidMultipartFile constraintAnnotation) {
+    public void initialize(IValidMultipart constraintAnnotation) {
         this.maxSize = constraintAnnotation.maxSize();
     }
 

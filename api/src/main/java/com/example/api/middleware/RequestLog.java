@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.example.api.utils.ServerLogger;
+import com.example.api.logger.ServerLogger;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

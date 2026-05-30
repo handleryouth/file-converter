@@ -1,4 +1,4 @@
-package com.example.api.utils;
+package com.example.api.logger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
