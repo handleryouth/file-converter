@@ -3,6 +3,7 @@ package com.example.api.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.stereotype.Service;
 
 import com.example.api.dto.response.ImageDto;
@@ -27,6 +28,7 @@ public class ImageQueueService {
         return imageQueueMapper.toImageDtoList((List<ImageQueue>) imageQueues);
     }
 
+    @Nullable
     public ImageDto getImageQueueById(UUID id) {
         var imageQueue = imageQueueRepository.findById(id).orElse(null);
         if (imageQueue == null) {

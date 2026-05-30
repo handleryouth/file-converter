@@ -14,8 +14,11 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import jakarta.validation.ConstraintDefinitionException;
 
 @RestControllerAdvice
 public class GlobalResponseInterceptor implements ResponseBodyAdvice<Object> {
@@ -33,6 +36,10 @@ public class GlobalResponseInterceptor implements ResponseBodyAdvice<Object> {
     public ResponseEntity<ApiResponse<Void>> handleGlobalException(Exception ex) {
         if (ex instanceof NoResourceFoundException) {
             return ResponseEntity.status(404).body(ApiResponse.error("Resource not found"));
+        } else if (ex instanceof ConstraintDefinitionException error) {
+            return ResponseEntity.status(400).body(ApiResponse.error("Validation error: " + error.getMessage()));
+        } else if (ex instanceof MaxUploadSizeExceededException error) {
+            return ResponseEntity.status(400).body(ApiResponse.error("Validation error: " + error.getMessage()));
         } else if (ex instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
             Map<String, String> errors = new HashMap<>();
             methodArgumentNotValidException.getBindingResult().getFieldErrors()

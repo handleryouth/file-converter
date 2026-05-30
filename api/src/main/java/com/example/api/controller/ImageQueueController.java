@@ -2,7 +2,7 @@ package com.example.api.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.dto.request.AddToQueueDTO;
+import com.example.api.dto.request.AddToQueueImageDTO;
 import com.example.api.dto.response.ImageDto;
 import com.example.api.service.ImageQueueService;
 
@@ -53,7 +53,7 @@ public class ImageQueueController {
 
     @PostMapping(value = "/add-to-queue", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Null> postMethodName(
-            @ModelAttribute @Valid AddToQueueDTO detail) {
+            @ModelAttribute @Valid AddToQueueImageDTO detail) {
 
         File directory = new File(uploadDir);
         if (!directory.exists()) {
@@ -71,6 +71,7 @@ public class ImageQueueController {
         }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
+   
     }
 
 }
