@@ -4,6 +4,7 @@ import { ListBox } from "@heroui/react";
 import { LANGUAGE_SELECTION, type ValueLanguage } from "../constant";
 import { useTranslation } from "../translations";
 import { useState } from "react";
+import Profile from "./Profile";
 
 export default function Header() {
   const { translate, i18n } = useTranslation();
@@ -15,7 +16,7 @@ export default function Header() {
         Image Converter
       </NavLink>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
         <CustomSelect
           selectProps={{
             value: language,
@@ -38,6 +39,7 @@ export default function Header() {
         <NavLink to="/about" end>
           {translate("page.about")}
         </NavLink>
+        <Profile />
       </div>
     </nav>
   );

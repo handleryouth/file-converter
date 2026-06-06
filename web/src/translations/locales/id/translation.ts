@@ -15,6 +15,8 @@ export const indonesiaTranslation = createTranslation({
     rectangle: "Kotak",
     circle: "Bulat",
     shape: "Bentuk",
+    signOut: "Keluar",
+    profileSettings: "Pengaturan Profil",
   },
   input: {
     put_image: "Silahkan letakkan gambar anda di sini!",

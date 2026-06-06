@@ -15,6 +15,8 @@ export const englishTranslation = createTranslation({
     rectangle: "Rectangle",
     circle: "Circle",
     shape: "Shape",
+    signOut: "Sign Out",
+    profileSettings: "Profile Settings",
   },
   input: {
     put_image: "Please put your image here!",

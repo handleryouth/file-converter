@@ -13,6 +13,8 @@ export interface ITranslationSchema {
     rectangle: string;
     circle: string;
     shape: string;
+    signOut: string;
+    profileSettings: string;
   };
   input: {
     put_image: string;
