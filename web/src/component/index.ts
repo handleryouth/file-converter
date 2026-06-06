@@ -4,6 +4,7 @@ export * from "./Footer";
 export * from "./Layout";
 export * from "./InputFile";
 export * from "./Select";
+export * from "./photo-cropper";
 
 export { default as Seo } from "./Seo";
 export { default as Header } from "./Header";

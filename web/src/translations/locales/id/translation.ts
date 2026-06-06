@@ -9,6 +9,9 @@ export const indonesiaTranslation = createTranslation({
     },
     image: "Gambar",
     video: "Video",
+    aspectRatio: "Ratio",
+    zoom: "Besar",
+    adjustment: "Penyesuaian",
   },
   input: {
     put_image: "Silahkan letakkan image anda di sini!",

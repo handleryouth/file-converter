@@ -1,10 +1,13 @@
-import { InputFile } from "../component";
-import { useRef } from "react";
+import { InputFile, PhotoCropperModal } from "../component";
+import { useRef, useState } from "react";
 import { useTranslation } from "../translations";
 
 export default function ImageScreen() {
   const { translate } = useTranslation();
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const [showCrop, setShowCrop] = useState(false);
+  const [imageInput, setImageInput] = useState<string>();
+
   return (
     <div className="h-full flex flex-col items-center justify-center">
       <InputFile
@@ -16,13 +19,27 @@ export default function ImageScreen() {
         input={{
           id: "input-image",
           ref: inputFileRef,
-          onChange: () => console.log("testing"),
+          onChange: (value) => {
+            setShowCrop(true);
+            const file = value.target.files?.[0];
+
+            if (file) {
+              setImageInput(URL.createObjectURL(file));
+            }
+          },
         }}
         buttonProps={{
           onClick: () => {
             inputFileRef.current?.click();
           },
         }}
+      />
+
+      <PhotoCropperModal
+        imageValue={imageInput}
+        onOpenChange={setShowCrop}
+        visible={showCrop}
+        onCroppedImage={() => console.log("testing")}
       />
     </div>
   );

@@ -9,6 +9,9 @@ export const englishTranslation = createTranslation({
     },
     image: "Image",
     video: "Video",
+    aspectRatio: "Ratio",
+    zoom: "Zoom",
+    adjustment: "Adjustment",
   },
   input: {
     put_image: "Please put your image here!",

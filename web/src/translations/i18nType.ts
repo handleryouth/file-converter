@@ -7,6 +7,9 @@ export interface ITranslationSchema {
     };
     image: string;
     video: string;
+    aspectRatio: string;
+    zoom: string;
+    adjustment: string;
   };
   input: {
     put_image: string;
