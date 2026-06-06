@@ -12,9 +12,12 @@ export const indonesiaTranslation = createTranslation({
     aspectRatio: "Ratio",
     zoom: "Besar",
     adjustment: "Penyesuaian",
+    rectangle: "Kotak",
+    circle: "Bulat",
+    shape: "Bentuk",
   },
   input: {
-    put_image: "Silahkan letakkan image anda di sini!",
+    put_image: "Silahkan letakkan gambar anda di sini!",
   },
   page: {
     about: "Tentang",

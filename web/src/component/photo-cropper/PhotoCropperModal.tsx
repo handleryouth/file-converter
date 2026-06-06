@@ -1,11 +1,16 @@
-import { useState } from "react";
-import Cropper, { type Area } from "react-easy-crop";
-import { Button, Modal } from "@heroui/react";
+import { useCallback, useState } from "react";
+import Cropper, { type Area, type CropperProps } from "react-easy-crop";
+import { Button, Modal, type Selection } from "@heroui/react";
 import CropSize from "./CropSize";
 import ZoomSlider from "./ZoomSlider";
 import rotateRight from "../../assets/icons/rotate-right.svg";
 import { useTranslation } from "../../translations";
-import { ASPECT_SIZES_MAPPING, type AspectRatioKey } from "./CropOptions";
+import {
+  ASPECT_SIZES_MAPPING,
+  ROTATE_DEGRESS_PER_CLICK,
+  type AspectRatioKey,
+} from "./CropOptions";
+import CropShape from "./CropShape";
 
 interface PhotoCropperModalProps {
   onCroppedImage: () => void;
@@ -23,6 +28,16 @@ export default function PhotoCropperModal({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [aspectRatio, setAspectRatio] = useState<number>();
   const [zoom, setZoom] = useState(1);
+  const [rotate, setRotate] = useState(0);
+
+  const [cropShape, setCropShape] = useState<CropperProps["cropShape"]>("rect");
+
+  const resetAllValue = useCallback(() => {
+    setCrop({ x: 0, y: 0 });
+    setAspectRatio(undefined);
+    setZoom(1);
+    setRotate(0);
+  }, []);
 
   const { translate } = useTranslation();
 
@@ -36,7 +51,7 @@ export default function PhotoCropperModal({
       <Modal.Backdrop isOpen={visible} onOpenChange={onOpenChange}>
         <Modal.Container size="cover">
           <Modal.Dialog>
-            <Modal.CloseTrigger />
+            <Modal.CloseTrigger onClick={resetAllValue} />
             <Modal.Header>
               <Modal.Heading className="font-bold text-2xl">
                 {translate("common.adjustment")}
@@ -48,6 +63,8 @@ export default function PhotoCropperModal({
                   image={imageValue}
                   crop={crop}
                   zoom={zoom}
+                  cropShape={cropShape}
+                  rotation={rotate}
                   aspect={aspectRatio}
                   onCropChange={setCrop}
                   onCropComplete={onCropComplete}
@@ -65,10 +82,42 @@ export default function PhotoCropperModal({
                     }
                   }}
                 />
-                <ZoomSlider />
-                <Button isIconOnly variant="tertiary">
+                <ZoomSlider
+                  onChange={(zoom) => {
+                    if (typeof zoom === "number") {
+                      setZoom(zoom);
+                    }
+                  }}
+                  zoom={zoom}
+                />
+                <Button
+                  isIconOnly
+                  onClick={() => {
+                    setRotate((rotate) => {
+                      const currentRotateAfterIncrement =
+                        rotate + ROTATE_DEGRESS_PER_CLICK;
+                      if (currentRotateAfterIncrement === 360) {
+                        return 0;
+                      } else {
+                        return currentRotateAfterIncrement;
+                      }
+                    });
+                  }}
+                  variant="tertiary"
+                >
                   <img src={rotateRight} width={20} height={20} />
                 </Button>
+
+                <CropShape
+                  onChange={(key: Selection) => {
+                    if (key instanceof Set) {
+                      const setIterator = key.values();
+                      const selectedValue = setIterator.next().value;
+                      setCropShape(selectedValue as CropperProps["cropShape"]);
+                    }
+                  }}
+                  selectedValue={cropShape}
+                />
               </div>
             </Modal.Body>
             <Modal.Footer>

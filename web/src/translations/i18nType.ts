@@ -10,6 +10,9 @@ export interface ITranslationSchema {
     aspectRatio: string;
     zoom: string;
     adjustment: string;
+    rectangle: string;
+    circle: string;
+    shape: string;
   };
   input: {
     put_image: string;

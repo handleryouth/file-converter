@@ -12,6 +12,9 @@ export const englishTranslation = createTranslation({
     aspectRatio: "Ratio",
     zoom: "Zoom",
     adjustment: "Adjustment",
+    rectangle: "Rectangle",
+    circle: "Circle",
+    shape: "Shape",
   },
   input: {
     put_image: "Please put your image here!",

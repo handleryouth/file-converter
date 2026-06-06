@@ -1,10 +1,14 @@
+import type { StrictTranslationPath } from "../../translations";
+
 export type AspectRatioKey = "1/1" | "9/16" | "16/9" | "4/3" | "custom";
 
-export interface CropSizeMenu {
-  id: AspectRatioKey;
+export interface CropSizeDropdown<T = string, K = string> {
+  id: K;
   value: string;
-  text: string;
+  text: T;
 }
+
+export const ROTATE_DEGRESS_PER_CLICK = 90;
 
 export type AspectSizesMapping = Omit<Record<AspectRatioKey, number>, "custom">;
 
@@ -15,30 +19,45 @@ export const ASPECT_SIZES_MAPPING: AspectSizesMapping = {
   "9/16": 9 / 16,
 };
 
-export const LIST_OF_ASPECT_SIZES: CropSizeMenu[] = [
+export const LIST_OF_ASPECT_SIZES: CropSizeDropdown<string, AspectRatioKey>[] =
+  [
+    {
+      id: "1/1",
+      text: "1:1",
+      value: "1/1",
+    },
+    {
+      id: "9/16",
+      text: "9:16",
+      value: "9/16",
+    },
+    {
+      id: "16/9",
+      text: "16:9",
+      value: "16/9",
+    },
+    {
+      id: "4/3",
+      text: "4/3",
+      value: "4/3",
+    },
+    {
+      id: "custom",
+      text: "Custom",
+      value: "Custom",
+    },
+  ];
+
+export const LIST_OF_SHAPE_DROPDOWN = [
   {
-    id: "1/1",
-    text: "1:1",
-    value: "1/1",
+    id: "rect",
+    text: "common.rectangle",
+    value: "rectangle",
   },
+
   {
-    id: "9/16",
-    text: "9:16",
-    value: "9/16",
+    id: "round",
+    text: "common.circle",
+    value: "round",
   },
-  {
-    id: "16/9",
-    text: "16:9",
-    value: "16/9",
-  },
-  {
-    id: "4/3",
-    text: "4/3",
-    value: "4/3",
-  },
-  {
-    id: "custom",
-    text: "Custom",
-    value: "Custom",
-  },
-];
+] as const satisfies CropSizeDropdown<StrictTranslationPath>[];
