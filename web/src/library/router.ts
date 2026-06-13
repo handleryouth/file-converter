@@ -1,5 +1,12 @@
 import { createBrowserRouter } from "react-router";
-import { Home, Login, NotFound, ProfileSettings, SignUp } from "../pages";
+import {
+  ForgotPassword,
+  Home,
+  Login,
+  NotFound,
+  ProfileSettings,
+  SignUp,
+} from "../pages";
 import { Layout } from "../component";
 
 export const router = createBrowserRouter([
@@ -22,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "profile-settings",
         Component: ProfileSettings,
+      },
+      {
+        path: "forgot-password",
+        Component: ForgotPassword,
       },
     ],
   },

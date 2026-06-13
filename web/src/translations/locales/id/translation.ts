@@ -17,9 +17,14 @@ export const indonesiaTranslation = createTranslation({
     shape: "Bentuk",
     signOut: "Keluar",
     profileSettings: "Pengaturan Profil",
+    forgotPassword: "Lupa Kata Sandi",
+    signUp: "Daftar",
+    login: "Masuk",
   },
   input: {
     put_image: "Silahkan letakkan gambar anda di sini!",
+    putEmail: "Silahkan masukkan alamat email anda!",
+    putCredentials: "Silahkan masukkan kredensial anda!",
   },
   page: {
     about: "Tentang",

@@ -17,9 +17,14 @@ export const englishTranslation = createTranslation({
     shape: "Shape",
     signOut: "Sign Out",
     profileSettings: "Profile Settings",
+    forgotPassword: "Forgot Password",
+    signUp: "Sign Up",
+    login: "Login",
   },
   input: {
     put_image: "Please put your image here!",
+    putEmail: "Please input your email address!",
+    putCredentials: "Please input your credentials!",
   },
   page: {
     about: "About",

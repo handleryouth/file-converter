@@ -4,19 +4,19 @@ import { Input, Seo } from "../component";
 import { Form, Formik, type FormikProps } from "formik";
 import { useTranslation } from "../translations";
 
-interface SignupFormValues {
+interface ForgotPasswordFormValues {
   email: string;
 }
 
-export default function SignUp() {
+export default function ForgotPassword() {
   const { translate } = useTranslation();
   return (
     <div className="flex items-center justify-center w-full">
-      <Seo title="Sign Up" description="Sign up to get an account" />
+      <Seo title="Forgot Password" description="Forgot password" />
       <Card className="w-100 p-8">
         <Card.Header>
           <Card.Title className="font-bold text-2xl">
-            {translate("common.signUp")}
+            {translate("common.forgotPassword")}
           </Card.Title>
           <Card.Description>{translate("input.putEmail")}</Card.Description>
         </Card.Header>
@@ -32,7 +32,7 @@ export default function SignUp() {
               }, 1000);
             }}
           >
-            {(props: FormikProps<SignupFormValues>) => (
+            {(props: FormikProps<ForgotPasswordFormValues>) => (
               <Form className="flex flex-col gap-4">
                 <Input
                   name="email"

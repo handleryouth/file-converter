@@ -15,9 +15,14 @@ export interface ITranslationSchema {
     shape: string;
     signOut: string;
     profileSettings: string;
+    forgotPassword: string;
+    signUp: string;
+    login: string;
   };
   input: {
     put_image: string;
+    putEmail: string;
+    putCredentials: string;
   };
   page: {
     home: string;
