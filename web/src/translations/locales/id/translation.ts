@@ -25,6 +25,7 @@ export const indonesiaTranslation = createTranslation({
     put_image: "Silahkan letakkan gambar anda di sini!",
     putEmail: "Silahkan masukkan alamat email anda!",
     putCredentials: "Silahkan masukkan kredensial anda!",
+    putVideo: "Silahkan letakkan video anda di sini!",
   },
   page: {
     about: "Tentang",

@@ -7,6 +7,8 @@ export * from "./Select";
 export * from "./photo-cropper";
 export * from "./Input";
 export * from "./InputPassword";
+export * from "./video-cropper";
+export * from "./video-player";
 
 export { default as Seo } from "./Seo";
 export { default as Header } from "./Header";

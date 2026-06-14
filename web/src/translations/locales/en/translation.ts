@@ -25,6 +25,7 @@ export const englishTranslation = createTranslation({
     put_image: "Please put your image here!",
     putEmail: "Please input your email address!",
     putCredentials: "Please input your credentials!",
+    putVideo: "Please put your video here!",
   },
   page: {
     about: "About",

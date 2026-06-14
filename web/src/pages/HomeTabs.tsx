@@ -23,7 +23,7 @@ export default function HomeTabs() {
       <Tabs.Panel className="pt-4 h-full" id="image">
         <ImageScreen />
       </Tabs.Panel>
-      <Tabs.Panel className="pt-4" id="video">
+      <Tabs.Panel className="pt-4 h-full" id="video">
         <VideoScreen />
       </Tabs.Panel>
     </Tabs>

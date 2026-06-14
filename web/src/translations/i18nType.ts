@@ -23,6 +23,7 @@ export interface ITranslationSchema {
     put_image: string;
     putEmail: string;
     putCredentials: string;
+    putVideo: string;
   };
   page: {
     home: string;
