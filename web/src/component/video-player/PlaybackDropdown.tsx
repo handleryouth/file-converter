@@ -1,5 +1,4 @@
 import { Button, Dropdown, Label, type Selection } from "@heroui/react";
-import React from "react";
 import { LIST_OF_PLAYBACKRATE_DROPDOWN } from "./VideoOptions";
 
 interface PlaybackDropdownProps {

@@ -18,6 +18,15 @@ export interface ITranslationSchema {
     forgotPassword: string;
     signUp: string;
     login: string;
+    trim: string;
+    mute: string;
+    unmute: string;
+    playbackRate: string;
+    rotateRight: string;
+    rotateLeft: string;
+    cut: string;
+    before: string;
+    after: string;
   };
   input: {
     put_image: string;
