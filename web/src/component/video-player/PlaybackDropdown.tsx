@@ -1,18 +1,28 @@
 import { Button, Dropdown, Label, type Selection } from "@heroui/react";
-import { LIST_OF_PLAYBACKRATE_DROPDOWN } from "./VideoOptions";
+import {
+  LIST_OF_PLAYBACKRATE_DROPDOWN,
+  VIDEO_WIDTH_THRESHOLD,
+} from "./VideoOptions";
 
 interface PlaybackDropdownProps {
   onChange: (keys: Selection) => void;
   selectedValue: number;
+  dimensions: DOMRect | null;
 }
 
 export default function PlaybackDropdown({
   onChange,
   selectedValue,
+  dimensions,
 }: PlaybackDropdownProps) {
   return (
     <Dropdown>
-      <Button aria-label="Menu" variant="secondary">
+      <Button
+        className={`${(dimensions?.width ?? 0) > VIDEO_WIDTH_THRESHOLD ? "" : "hidden"}`}
+        size="sm"
+        aria-label="Menu"
+        variant="secondary"
+      >
         {selectedValue}
       </Button>
       <Dropdown.Popover>

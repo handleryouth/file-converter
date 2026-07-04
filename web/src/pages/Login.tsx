@@ -1,6 +1,6 @@
 import { Button, Card } from "@heroui/react";
 import { NavLink } from "react-router";
-import { Input, InputPassword, Seo } from "../component";
+import { Input, InputPassword, LottiePlayer, Seo } from "../component";
 import { Form, Formik, type FormikProps } from "formik";
 import { useTranslation } from "../translations";
 
@@ -13,7 +13,7 @@ export default function Login() {
   const { translate } = useTranslation();
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full gap-4">
       <Seo
         title="Login"
         description="Login screen to access video and image converter"
@@ -79,6 +79,13 @@ export default function Login() {
           </NavLink>
         </Card.Footer>
       </Card>
+
+      <LottiePlayer
+        animation="mobileVideo"
+        playerOptions={{
+          className: "w-96",
+        }}
+      />
     </div>
   );
 }

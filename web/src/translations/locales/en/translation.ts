@@ -40,4 +40,13 @@ export const englishTranslation = createTranslation({
     about: "About",
     home: "Home",
   },
+  error: {
+    error: "Error",
+    somethingWentWrong: "Something went wrong, please try again!",
+    pageNotFound: "Page not found",
+    goBack: "Go Back",
+  },
+  action: {
+    refresh: "Refresh",
+  },
 });

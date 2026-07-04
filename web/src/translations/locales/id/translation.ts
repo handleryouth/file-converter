@@ -40,4 +40,13 @@ export const indonesiaTranslation = createTranslation({
     about: "Tentang",
     home: "Beranda",
   },
+  error: {
+    error: "Terjadi Kesalahan",
+    somethingWentWrong: "Terjadi kesalahan, silahkan coba lagi!",
+    pageNotFound: "Halaman tidak ditemukan",
+    goBack: "Kembali",
+  },
+  action: {
+    refresh: "Segarkan",
+  },
 });

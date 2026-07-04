@@ -9,6 +9,7 @@ import {
   type RefObject,
 } from "react";
 import VideoControls from "./VideoControls";
+import type { CustomPlayingVideoMetadata } from "./VideoOptions";
 
 interface BackdropVideoControlsProps {
   children: ReactNode;
@@ -19,6 +20,8 @@ interface BackdropVideoControlsProps {
   currentTime: number;
   handlePlayingVideo: (value: boolean) => void;
   handleSetDuration: (value: number) => void;
+  dimensions: DOMRect | null;
+  trimValue?: CustomPlayingVideoMetadata;
 }
 
 export default function BackdropVideoControls({
@@ -30,6 +33,8 @@ export default function BackdropVideoControls({
   duration,
   handlePlayingVideo,
   handleSetDuration,
+  dimensions,
+  trimValue,
 }: BackdropVideoControlsProps) {
   const [showBackdrop, setShowbackdrop] = useState(true);
   const timeOutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -44,14 +49,19 @@ export default function BackdropVideoControls({
     if (!isPlaying) {
       handleTimeoutBackdrop();
       handlePlayingVideo(true);
-      ref.current?.play();
+      if (trimValue !== undefined && ref.current) {
+        ref.current.currentTime = trimValue.start;
+        ref.current.play();
+      } else {
+        ref.current?.play();
+      }
     } else {
       setShowbackdrop(true);
       clearTimeout(timeOutRef.current);
       handlePlayingVideo(false);
       ref.current?.pause();
     }
-  }, [handlePlayingVideo, handleTimeoutBackdrop, isPlaying, ref]);
+  }, [handlePlayingVideo, handleTimeoutBackdrop, isPlaying, ref, trimValue]);
 
   return (
     <div
@@ -61,38 +71,36 @@ export default function BackdropVideoControls({
       }}
       onMouseLeave={handleTimeoutBackdrop}
     >
-      {showControls && (
+      <div className={`absolute w-full h-full  z-2 flex flex-col items-center`}>
         <div
-          className={`absolute w-full h-full  z-2 flex flex-col items-center`}
+          className={`grow flex w-full justify-center items-center bg-black  ${showBackdrop ? "opacity-50" : "opacity-0"}`}
         >
-          <div
-            className={`grow flex w-full justify-center items-center bg-black  ${showBackdrop ? "opacity-50" : "opacity-0"}`}
+          <Button
+            onClick={handleBackdropPlayPressed}
+            isIconOnly
+            variant="tertiary"
           >
-            <Button
-              onClick={handleBackdropPlayPressed}
-              isIconOnly
-              variant="tertiary"
-            >
-              <img
-                src={isPlaying ? pauseIcon : playIcon}
-                width={20}
-                height={20}
-              />
-            </Button>
-          </div>
-
-          {showBackdrop && (
-            <VideoControls
-              currentTime={currentTime}
-              duration={duration}
-              handlePlayingState={handleBackdropPlayPressed}
-              handleSetCurrentTime={handleSetDuration}
-              isPlaying={isPlaying}
-              videoRef={ref}
+            <img
+              src={isPlaying ? pauseIcon : playIcon}
+              width={20}
+              height={20}
             />
-          )}
+          </Button>
         </div>
-      )}
+
+        {showControls && showBackdrop && (
+          <VideoControls
+            dimensions={dimensions}
+            currentTime={currentTime}
+            duration={duration}
+            handlePlayingState={handleBackdropPlayPressed}
+            handleSetCurrentTime={handleSetDuration}
+            isPlaying={isPlaying}
+            videoRef={ref}
+          />
+        )}
+      </div>
+
       {children}
     </div>
   );

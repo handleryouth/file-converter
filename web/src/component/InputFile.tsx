@@ -1,6 +1,7 @@
 import { Button, Input } from "@heroui/react";
 import { type ComponentProps } from "react";
 import { useTranslation } from "../translations";
+import LottiePlayer from "./LottiePlayer";
 
 type NativeInputType = Exclude<ComponentProps<typeof Input>, "type">;
 
@@ -25,6 +26,8 @@ export default function InputFile({
   const { children: buttonChildren, ...buttonPropsRest } = buttonProps ?? {};
   return (
     <div className={`flex flex-col gap-2 ${containerClassName ?? ""}`}>
+      <LottiePlayer animation="smartphoneFolder" />
+
       <label {...label} className={`font-bold ${label.className ?? ""}`}>
         {label.children}
       </label>

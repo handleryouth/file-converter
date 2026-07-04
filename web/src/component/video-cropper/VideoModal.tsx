@@ -2,6 +2,7 @@ import { Button, Modal, Separator, Typography } from "@heroui/react";
 import { useTranslation } from "../../translations";
 import VideoPlayer from "../video-player/VideoPlayer";
 import VideoTools from "./VideoTools";
+import { useElementDimensions } from "../../hooks";
 
 interface VideoModalProps {
   visible: boolean;
@@ -15,6 +16,7 @@ export default function VideoModal({
   onOpenChange,
 }: VideoModalProps) {
   const { translate } = useTranslation();
+  const { dimensions, ref } = useElementDimensions();
   return (
     <Modal>
       <Modal.Backdrop isOpen={visible} onOpenChange={onOpenChange}>
@@ -37,14 +39,20 @@ export default function VideoModal({
 
                 <Separator orientation="vertical" />
 
-                <div className="text-center">
+                <div className="text-center" ref={ref}>
                   <Typography.Heading level={3} className="text-center">
                     {translate("common.after")}
                   </Typography.Heading>
 
-                  <VideoPlayer videoUrl={videoValue} controlsType="backdrop" />
+                  <VideoPlayer
+                    videoProps={{
+                      className: "w-full",
+                    }}
+                    videoUrl={videoValue}
+                    controlsType="backdrop"
+                  />
 
-                  <VideoTools />
+                  <VideoTools dimensions={dimensions} videoValue={videoValue} />
                 </div>
               </div>
             </Modal.Body>

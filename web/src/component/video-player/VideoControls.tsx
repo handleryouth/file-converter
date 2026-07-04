@@ -6,6 +6,10 @@ import volumeMuted from "../../assets/icons/volume-muted.svg";
 import volumeOn from "../../assets/icons/volume-on.svg";
 import PlaybackDropdown from "./PlaybackDropdown";
 import VideoTimer from "./VideoTimer";
+import {
+  VIDEO_WIDTH_THRESHOLD,
+  type CustomPlayingVideoMetadata,
+} from "./VideoOptions";
 
 interface VideoControlProps {
   videoRef: RefObject<HTMLVideoElement | null>;
@@ -14,11 +18,12 @@ interface VideoControlProps {
   handlePlayingState: (value: boolean) => void;
   isPlaying: boolean;
   handleSetCurrentTime: (value: number) => void;
+  dimensions: DOMRect | null;
+  trimValue?: CustomPlayingVideoMetadata;
 }
 
 function convertToVideoLength(position: number, totalDuration: number) {
   const durationFromPercentage = Math.floor((position / 100) * totalDuration);
-  console.log("duration from percentage", durationFromPercentage);
   return durationFromPercentage;
 }
 
@@ -29,8 +34,11 @@ export default function VideoControls({
   handlePlayingState,
   isPlaying,
   handleSetCurrentTime,
+  dimensions,
+  trimValue,
 }: VideoControlProps) {
   const [isMuted, setIsMuted] = useState(false);
+
   const [playbackRate, setPlaybackRate] = useState(1);
 
   const handlePlayingVideo = useCallback(() => {
@@ -61,22 +69,38 @@ export default function VideoControls({
         if (type === "forward") {
           videoRef.current.currentTime += leap;
         } else {
-          videoRef.current.currentTime -= leap;
+          const substractTime = videoRef.current.currentTime - leap;
+          if (trimValue !== undefined) {
+            if (substractTime < videoRef.current.currentTime) {
+              videoRef.current.currentTime = trimValue?.start;
+            } else {
+              videoRef.current.currentTime -= leap;
+            }
+          } else {
+            videoRef.current.currentTime -= leap;
+          }
         }
       }
     },
-    [videoRef],
+    [trimValue, videoRef],
   );
 
   return (
     <div className="flex w-full items-center bg-gray-400 p-2 gap-4">
-      <div className="flex items-center gap-4 ">
-        <Button isIconOnly onClick={handlePlayingVideo} variant="tertiary">
+      <div className="flex items-center gap-4">
+        <Button
+          size="sm"
+          isIconOnly
+          onClick={handlePlayingVideo}
+          variant="tertiary"
+        >
           <img src={isPlaying ? pauseIcon : playIcon} width={20} height={20} />
         </Button>
 
         <Button
+          size="sm"
           isIconOnly
+          className={` ${(dimensions?.width ?? 0) > VIDEO_WIDTH_THRESHOLD ? "" : "hidden"} `}
           onClick={() => handleForward(10, "backward")}
           variant="tertiary"
         >
@@ -84,7 +108,9 @@ export default function VideoControls({
         </Button>
 
         <Button
+          size="sm"
           isIconOnly
+          className={` ${(dimensions?.width ?? 0) > VIDEO_WIDTH_THRESHOLD ? "" : "hidden"}`}
           onClick={() => handleForward(10, "forward")}
           variant="tertiary"
         >
@@ -95,6 +121,7 @@ export default function VideoControls({
       <VideoTimer
         onSliderPressed={(value) => {
           const convertTime = convertToVideoLength(value, duration);
+
           handleSetCurrentTime(convertTime);
           if (videoRef.current) {
             videoRef.current.currentTime = convertTime;
@@ -105,11 +132,18 @@ export default function VideoControls({
       />
 
       <div className="flex items-center gap-4">
-        <Button isIconOnly onClick={handleMuteVideo} variant="tertiary">
+        <Button
+          size="sm"
+          isIconOnly
+          onClick={handleMuteVideo}
+          variant="tertiary"
+          className={`${(dimensions?.width ?? 0) > VIDEO_WIDTH_THRESHOLD ? "" : "hidden"}`}
+        >
           <img src={isMuted ? volumeOn : volumeMuted} width={20} height={20} />
         </Button>
 
         <PlaybackDropdown
+          dimensions={dimensions}
           onChange={(key) => {
             if (key instanceof Set) {
               const setIterator = key.values();

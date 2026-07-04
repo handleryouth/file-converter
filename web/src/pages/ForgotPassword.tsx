@@ -1,6 +1,6 @@
 import { Button, Card } from "@heroui/react";
 import { NavLink } from "react-router";
-import { Input, Seo } from "../component";
+import { Input, LottiePlayer, Seo } from "../component";
 import { Form, Formik, type FormikProps } from "formik";
 import { useTranslation } from "../translations";
 
@@ -57,6 +57,13 @@ export default function ForgotPassword() {
           </NavLink>
         </Card.Footer>
       </Card>
+
+      <LottiePlayer
+        animation="smartphoneLock"
+        playerOptions={{
+          className: "w-96",
+        }}
+      />
     </div>
   );
 }

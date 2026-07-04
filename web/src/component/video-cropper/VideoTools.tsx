@@ -8,16 +8,35 @@ import cut from "../../assets/icons/cut.svg";
 import { useTranslation } from "../../translations";
 import PlaybackDropdown from "../video-player/PlaybackDropdown";
 import { useState } from "react";
+import VideoTrimModal from "./VideoTrimModal";
 
-export default function VideoTools() {
+interface VideoToolsModal {
+  videoValue: string | undefined;
+  dimensions: DOMRect | null;
+}
+
+export default function VideoTools({
+  videoValue,
+  dimensions,
+}: VideoToolsModal) {
   const { translate } = useTranslation();
   const [playbackRate, setPlaybackRate] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
+  const [showTrimModal, setShowTrimModal] = useState(false);
 
   return (
     <div className="flex items-center gap-4 w-full justify-center my-4">
+      <VideoTrimModal
+        onOpenChange={() => setShowTrimModal(false)}
+        videoValue={videoValue}
+        visible={showTrimModal}
+      />
       <Tooltip delay={0}>
-        <Button isIconOnly variant="secondary">
+        <Button
+          isIconOnly
+          onClick={() => setShowTrimModal(true)}
+          variant="secondary"
+        >
           <img src={cut} width={20} height={20} />
         </Button>
 
@@ -54,6 +73,7 @@ export default function VideoTools() {
 
       <Tooltip delay={0}>
         <PlaybackDropdown
+          dimensions={dimensions}
           onChange={(key) => {
             if (key instanceof Set) {
               const setIterator = key.values();

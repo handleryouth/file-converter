@@ -14,7 +14,6 @@
   "packageManager": "pnpm@10.11.1",
   "dependencies": {
     "@inquirer/prompts": "^8.5.2",
-    "concurrently": "^10.0.3",
-    "inquirer": "^14.0.2"
+    "concurrently": "^10.0.3"
   }
 }

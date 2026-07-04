@@ -38,6 +38,15 @@ export interface ITranslationSchema {
     home: string;
     about: string;
   };
+  error: {
+    error: string;
+    somethingWentWrong: string;
+    pageNotFound: string;
+    goBack: string;
+  };
+  action: {
+    refresh: string;
+  };
 }
 
 export const createTranslation = <T extends ITranslationSchema>(dict: T) =>

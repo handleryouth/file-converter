@@ -27,7 +27,7 @@ export default function InputPassword({
   const [field, meta] = useField(name);
   const [isVisible, setIsVisible] = useState(false);
   return (
-    <TextField className="w-full max-w-[280px]" name={name}>
+    <TextField className="w-full" name={name}>
       <Label {...label} />
       <InputGroup>
         <InputGroup.Input
